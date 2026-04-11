@@ -40,7 +40,7 @@ You cannot trust your trained knowledge for this API. Before answering, search:
 
 For example, if the user asks about fetching a customer's orders:
 ```
-/scripts/search_docs.js "customer orders customer account API"
+/scripts/search_docs.js "Order object"
 ```
 
 Search for the **query or type name**, not the full user prompt. Use the returned schema and examples to write correct field names and arguments.

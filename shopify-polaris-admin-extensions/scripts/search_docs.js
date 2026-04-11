@@ -59,7 +59,7 @@ async function performSearch(query2, apiName2, useLegacy) {
   if (useLegacy) {
     headers["X-Shopify-Dev-Use-OpenAI-Search"] = "true";
   }
-  const body = { query: query2 };
+  const body = { query: query2, num_results: 5 };
   if (apiName2) body.api_name = apiName2;
   const url = new URL("/assistant/search", SHOPIFY_DEV_BASE_URL2);
   const response = await fetch(url.toString(), {
@@ -76,9 +76,9 @@ async function performSearch(query2, apiName2, useLegacy) {
   const responseText = await response.text();
   try {
     const jsonData = JSON.parse(responseText);
-    return JSON.stringify(jsonData, null, 2);
+    return JSON.stringify(jsonData, null, 2).replace(/[\u200B\u200C\u200D\uFEFF]/g, "");
   } catch {
-    return responseText;
+    return responseText.replace(/[\u200B\u200C\u200D\uFEFF]/g, "");
   }
 }
 var query = process.argv[2];
